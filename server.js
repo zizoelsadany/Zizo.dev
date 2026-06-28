@@ -38,7 +38,10 @@ const ProfileSchema = new mongoose.Schema({
     experienceYears: String,
     happyClients: String,
     successRate: String,
-    cvBase64: String
+    cvBase64: String,
+    githubUrl: String,
+    linkedinUrl: String,
+    twitterUrl: String
 });
 const Profile = mongoose.model('Profile', ProfileSchema);
 
@@ -139,7 +142,10 @@ const initialProfile = {
     email: "zizoelsadany5@gmail.com",
     experienceYears: "3+",
     happyClients: "15+",
-    successRate: "99%"
+    successRate: "99%",
+    githubUrl: "https://github.com/zizoelsadany",
+    linkedinUrl: "https://linkedin.com/in/abd-elaziz-elsadany",
+    twitterUrl: "https://twitter.com"
 };
 
 if (!fs.existsSync(PROFILE_FILE)) {

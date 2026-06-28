@@ -320,6 +320,9 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('profile-experience').value = profile.experienceYears || '';
             document.getElementById('profile-clients').value = profile.happyClients || '';
             document.getElementById('profile-success').value = profile.successRate || '';
+            document.getElementById('profile-github').value = profile.githubUrl || '';
+            document.getElementById('profile-linkedin').value = profile.linkedinUrl || '';
+            document.getElementById('profile-twitter').value = profile.twitterUrl || '';
         } catch (err) {
             console.error("Error loading profile configuration:", err);
         }
@@ -353,7 +356,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 email: document.getElementById('profile-email').value,
                 experienceYears: document.getElementById('profile-experience').value,
                 happyClients: document.getElementById('profile-clients').value,
-                successRate: document.getElementById('profile-success').value
+                successRate: document.getElementById('profile-success').value,
+                githubUrl: document.getElementById('profile-github').value,
+                linkedinUrl: document.getElementById('profile-linkedin').value,
+                twitterUrl: document.getElementById('profile-twitter').value
             };
 
             profileStatus.className = 'form-status';

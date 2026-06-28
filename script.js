@@ -66,6 +66,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (statExperience) statExperience.textContent = profile.experienceYears;
             if (statClients) statClients.textContent = profile.happyClients;
             if (statSuccess) statSuccess.textContent = profile.successRate;
+
+            // Bind Footer Socials
+            const footerGithub = document.getElementById('footer-social-github');
+            const footerLinkedin = document.getElementById('footer-social-linkedin');
+            const footerTwitter = document.getElementById('footer-social-twitter');
+
+            if (footerGithub && profile.githubUrl) footerGithub.setAttribute('href', profile.githubUrl);
+            if (footerLinkedin && profile.linkedinUrl) footerLinkedin.setAttribute('href', profile.linkedinUrl);
+            if (footerTwitter && profile.twitterUrl) footerTwitter.setAttribute('href', profile.twitterUrl);
         } catch (error) {
             console.error("Profile load error:", error);
         }
@@ -340,11 +349,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                         break;
                     case 'contact':
+                        const ghDisplay = globalProfile.githubUrl ? globalProfile.githubUrl.replace(/^https?:\/\/(www\.)?/, '') : 'github.com/zizoelsadany';
+                        const liDisplay = globalProfile.linkedinUrl ? globalProfile.linkedinUrl.replace(/^https?:\/\/(www\.)?/, '') : 'linkedin.com/in/abd-elaziz-elsadany';
                         responseLine.innerHTML = `
                             Contact Information:<br>
-                            - <span style="color:var(--accent-color);">Email</span>: ${globalProfile.email || 'zizoelsadany5@gmail.com'}<br>
-                            - <span style="color:var(--accent-secondary);">GitHub</span>: github.com/zizoelsadany<br>
-                            - <span style="color:#22c55e;">LinkedIn</span>: linkedin.com/in/abd-elaziz-elsadany
+                            - <span style="color:var(--accent-color);">Email</span>: <a href="mailto:${globalProfile.email || 'zizoelsadany5@gmail.com'}" class="text-gradient">${globalProfile.email || 'zizoelsadany5@gmail.com'}</a><br>
+                            - <span style="color:var(--accent-secondary);">GitHub</span>: <a href="${globalProfile.githubUrl || 'https://github.com/zizoelsadany'}" target="_blank" class="text-gradient">${ghDisplay}</a><br>
+                            - <span style="color:#22c55e;">LinkedIn</span>: <a href="${globalProfile.linkedinUrl || 'https://linkedin.com/in/abd-elaziz-elsadany'}" target="_blank" class="text-gradient">${liDisplay}</a>
                         `;
                         break;
                     case 'clear':
