@@ -126,17 +126,17 @@ if (!fs.existsSync(PROJECTS_FILE)) {
 }
 
 const initialProfile = {
-    logoFirstName: "Zeyad",
-    logoLastName: "Zizo",
+    logoFirstName: "AbdElaziz",
+    logoLastName: "Elsadany",
     logoSubtitle: "PORTFOLIO",
-    name: "Zeyad Zizo",
+    name: "AbdElaziz Elsadany",
     title: "Senior Full-Stack Developer",
     description: "I build premium, high-performance web applications with a focus on animation, responsive UI architecture, and robust database logic.",
     bioTitle: "I engineer digital solutions that load fast and look premium.",
     bioText1: "I am a passionate Full-Stack developer with a knack for building sleek user interfaces and solid backends. I love staying at the forefront of web technologies and creating highly optimized web systems.",
     bioText2: "Whether it's a high-concurrency SaaS dashboard, a fast-loading landing page, or a dynamic application, I focus on clean architecture, beautiful animations, and ultimate mobile responsiveness.",
     location: "Cairo, Egypt",
-    email: "zeyad@zizo.dev",
+    email: "zizoelsadany5@gmail.com",
     experienceYears: "3+",
     happyClients: "15+",
     successRate: "99%"
@@ -593,7 +593,7 @@ app.get('*', (req, res) => {
 if (!process.env.VERCEL) {
     app.listen(PORT, () => {
         console.log(`=================================================`);
-        console.log(`  Zeyad's Portfolio Server Running!`);
+        console.log(`  AbdElaziz's Portfolio Server Running!`);
         console.log(`  Local Address:   http://localhost:${PORT}`);
         console.log(`  Admin Panel:     http://localhost:${PORT}/admin.html`);
         console.log(`  Access from LAN: http://<your-ip>:${PORT}`);

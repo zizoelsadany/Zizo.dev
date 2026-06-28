@@ -46,12 +46,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const footerLogoLast = document.getElementById('footer-logo-last');
             const footerLogoSub = document.getElementById('footer-logo-sub');
 
-            if (logoFirst) logoFirst.textContent = profile.logoFirstName || 'Zeyad';
-            if (logoLast) logoLast.textContent = profile.logoLastName || 'Zizo';
+            if (logoFirst) logoFirst.textContent = profile.logoFirstName || 'AbdElaziz';
+            if (logoLast) logoLast.textContent = profile.logoLastName || 'Elsadany';
             if (logoSub) logoSub.textContent = profile.logoSubtitle || 'PORTFOLIO';
 
-            if (footerLogoFirst) footerLogoFirst.textContent = profile.logoFirstName || 'Zeyad';
-            if (footerLogoLast) footerLogoLast.textContent = profile.logoLastName || 'Zizo';
+            if (footerLogoFirst) footerLogoFirst.textContent = profile.logoFirstName || 'AbdElaziz';
+            if (footerLogoLast) footerLogoLast.textContent = profile.logoLastName || 'Elsadany';
             if (footerLogoSub) footerLogoSub.textContent = profile.logoSubtitle || 'PORTFOLIO';
             
             if (aboutBioTitle) aboutBioTitle.textContent = profile.bioTitle;
@@ -313,7 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     case 'help':
                         responseLine.innerHTML = `
                             Available commands:<br>
-                            - <span class="text-gradient" style="font-weight:bold;">about</span>    : Learn more about Zeyad.<br>
+                            - <span class="text-gradient" style="font-weight:bold;">about</span>    : Learn more about AbdElaziz.<br>
                             - <span class="text-gradient" style="font-weight:bold;">skills</span>   : Print out core technical stack.<br>
                             - <span class="text-gradient" style="font-weight:bold;">projects</span> : List featured project titles.<br>
                             - <span class="text-gradient" style="font-weight:bold;">contact</span>  : Get email and social contact links.<br>
@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         `;
                         break;
                     case 'about':
-                        responseLine.innerHTML = `${globalProfile.name || 'Zeyad Zizo'} is a ${globalProfile.title || 'Senior Full-Stack Developer'} based in ${globalProfile.location || 'Cairo, Egypt'}. ${globalProfile.bioText1 || ''}`;
+                        responseLine.innerHTML = `${globalProfile.name || 'AbdElaziz Elsadany'} is a ${globalProfile.title || 'Senior Full-Stack Developer'} based in ${globalProfile.location || 'Cairo, Egypt'}. ${globalProfile.bioText1 || ''}`;
                         break;
                     case 'skills':
                         if (globalSkills.length === 0) {
@@ -342,9 +342,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     case 'contact':
                         responseLine.innerHTML = `
                             Contact Information:<br>
-                            - <span style="color:var(--accent-color);">Email</span>: ${globalProfile.email || 'zeyad@zizo.dev'}<br>
-                            - <span style="color:var(--accent-secondary);">GitHub</span>: github.com/zizo-dev<br>
-                            - <span style="color:#22c55e;">LinkedIn</span>: linkedin.com/in/zizo-dev
+                            - <span style="color:var(--accent-color);">Email</span>: ${globalProfile.email || 'zizoelsadany5@gmail.com'}<br>
+                            - <span style="color:var(--accent-secondary);">GitHub</span>: github.com/zizoelsadany<br>
+                            - <span style="color:#22c55e;">LinkedIn</span>: linkedin.com/in/abd-elaziz-elsadany
                         `;
                         break;
                     case 'clear':
