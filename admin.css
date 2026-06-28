@@ -363,3 +363,110 @@
     border-color: var(--accent-color);
     box-shadow: 0 0 15px rgba(168, 85, 247, 0.15);
 }
+
+/* Messages Inbox Styles */
+.messages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 15px;
+    max-height: 600px;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.messages-list::-webkit-scrollbar {
+    width: 6px;
+}
+.messages-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+.messages-list::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+}
+
+.message-card-item {
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 20px;
+    transition: var(--transition-quick);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.message-card-item:hover {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(168, 85, 247, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+@media (max-width: 576px) {
+    .message-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+}
+
+.sender-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.sender-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.sender-email a {
+    font-size: 0.85rem;
+    color: var(--accent-secondary);
+    text-decoration: none;
+    transition: var(--transition-quick);
+}
+
+.sender-email a:hover {
+    text-decoration: underline;
+    color: var(--accent-color);
+}
+
+.message-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+@media (max-width: 576px) {
+    .message-actions {
+        justify-content: space-between;
+    }
+}
+
+.message-date {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.message-content {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    white-space: pre-wrap;
+    word-break: break-word;
+}

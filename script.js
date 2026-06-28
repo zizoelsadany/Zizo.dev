@@ -385,28 +385,53 @@ document.addEventListener('DOMContentLoaded', () => {
     const formStatus = document.getElementById('form-status');
 
     if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             submitBtn.disabled = true;
             const originalBtnContent = submitBtn.innerHTML;
             submitBtn.innerHTML = `<span>Sending...</span><div class="pulse-dot"></div>`;
             
-            setTimeout(() => {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            try {
+                const response = await fetch('/api/messages', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, email, message })
+                });
+
+                const data = await response.json();
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalBtnContent;
-                
-                formStatus.className = 'form-status success';
-                formStatus.innerHTML = '<i data-lucide="check-circle" style="display:inline-block; vertical-align:middle; margin-right:6px; width:16px; height:16px;"></i> Message sent successfully! I will reply soon.';
+
+                if (data.success) {
+                    formStatus.className = 'form-status success';
+                    formStatus.innerHTML = '<i data-lucide="check-circle" style="display:inline-block; vertical-align:middle; margin-right:6px; width:16px; height:16px;"></i> Message sent successfully! I will reply soon.';
+                    contactForm.reset();
+                } else {
+                    formStatus.className = 'form-status error';
+                    formStatus.innerHTML = `<i data-lucide="alert-triangle" style="display:inline-block; vertical-align:middle; margin-right:6px; width:16px; height:16px;"></i> ${data.message || 'Failed to send message.'}`;
+                }
+            } catch (err) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnContent;
+                formStatus.className = 'form-status error';
+                formStatus.innerHTML = '<i data-lucide="alert-triangle" style="display:inline-block; vertical-align:middle; margin-right:6px; width:16px; height:16px;"></i> Network error. Please try again later.';
+            }
+
+            if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
-                
-                contactForm.reset();
-                
-                setTimeout(() => {
-                    formStatus.className = 'form-status';
-                    formStatus.innerHTML = '';
-                }, 5000);
-            }, 1500);
+            }
+
+            setTimeout(() => {
+                formStatus.className = 'form-status';
+                formStatus.innerHTML = '';
+            }, 5000);
         });
     }
 

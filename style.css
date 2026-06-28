@@ -113,20 +113,20 @@ body::-webkit-scrollbar-thumb:hover {
     font-family: var(--font-mono);
     font-weight: 700;
     color: var(--accent-color);
-    opacity: 0.06;
+    opacity: 0.15;
     filter: blur(0.5px);
     user-select: none;
 }
 
 .shape-1 {
-    font-size: 7rem;
+    font-size: 10rem;
     top: 18%;
     left: 10%;
     animation: float-slow 10s ease-in-out infinite;
 }
 
 .shape-2 {
-    font-size: 9rem;
+    font-size: 14rem;
     top: 28%;
     right: 8%;
     animation: float-slow 14s ease-in-out infinite 2s;
@@ -134,7 +134,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .shape-3 {
-    font-size: 6rem;
+    font-size: 9rem;
     bottom: 25%;
     left: 12%;
     animation: float-slow 12s ease-in-out infinite 1s;
@@ -142,7 +142,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .shape-4 {
-    font-size: 8rem;
+    font-size: 12rem;
     bottom: 35%;
     right: 10%;
     animation: float-slow 11s ease-in-out infinite 3s;

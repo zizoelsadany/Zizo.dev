@@ -37,6 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveSkillsBtn = document.getElementById('save-skills-btn');
     const skillsStatus = document.getElementById('skills-status');
 
+    // Messages selectors
+    const messagesList = document.getElementById('messages-list');
+    const refreshMessagesBtn = document.getElementById('refresh-messages-btn');
+
     let allProjects = [];
 
     // Tabs Switcher
@@ -64,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
             loadAdminProjects();
             loadAdminProfile();
             loadAdminSkills();
+            loadAdminMessages();
         } else {
             loginOverlay.style.display = 'flex';
             adminDashboard.style.display = 'none';
@@ -514,5 +519,116 @@ document.addEventListener('DOMContentLoaded', () => {
                 skillsStatus.textContent = 'Server response error.';
             }
         });
+    }
+
+    // --- Tab 4: Messages Inbox Logic ---
+    async function loadAdminMessages() {
+        if (!messagesList) return;
+        
+        messagesList.innerHTML = `<div class="loading-state"><span class="pulse-dot"></span> Fetching messages...</div>`;
+        const token = localStorage.getItem('zizo_admin_token');
+
+        try {
+            const response = await fetch(`/api/messages?t=${Date.now()}`, {
+                headers: { 'Authorization': token }
+            });
+            if (!response.ok) throw new Error("Failed to fetch messages.");
+            const messages = await response.json();
+            
+            renderAdminMessages(messages);
+        } catch (err) {
+            messagesList.innerHTML = `<div class="loading-state" style="color:#ef4444;">Failed to fetch inbox messages.</div>`;
+        }
+    }
+
+    function renderAdminMessages(messages) {
+        if (!messagesList) return;
+        if (messages.length === 0) {
+            messagesList.innerHTML = `
+                <div class="loading-state" style="padding: 60px 0;">
+                    <i data-lucide="inbox" style="width: 48px; height: 48px; margin-bottom: 12px; opacity: 0.5;"></i>
+                    <p>Your inbox is empty. No messages received yet.</p>
+                </div>
+            `;
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+            return;
+        }
+
+        messagesList.innerHTML = messages.map(msg => {
+            const dateStr = new Date(msg.createdAt).toLocaleString(undefined, {
+                dateStyle: 'medium',
+                timeStyle: 'short'
+            });
+            return `
+                <div class="message-card-item">
+                    <div class="message-header">
+                        <div class="sender-info">
+                            <span class="sender-name">${escapeHTML(msg.name)}</span>
+                            <span class="sender-email"><a href="mailto:${escapeHTML(msg.email)}">${escapeHTML(msg.email)}</a></span>
+                        </div>
+                        <div class="message-actions">
+                            <span class="message-date">${dateStr}</span>
+                            <button class="btn btn-outline btn-icon-only btn-delete-msg" data-id="${msg.id}" title="Delete Message">
+                                <i data-lucide="trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="message-content">
+                        ${escapeHTML(msg.message).replace(/\n/g, '<br>')}
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+
+        // Attach delete handlers
+        document.querySelectorAll('.btn-delete-msg').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = btn.getAttribute('data-id');
+                deleteMessage(id);
+            });
+        });
+    }
+
+    async function deleteMessage(id) {
+        const confirmDelete = confirm("Are you sure you want to delete this message?");
+        if (!confirmDelete) return;
+
+        const token = localStorage.getItem('zizo_admin_token');
+
+        try {
+            const response = await fetch(`/api/messages/${id}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': token }
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                loadAdminMessages();
+            } else {
+                alert(data.message || 'Failed to delete message.');
+            }
+        } catch (err) {
+            alert('Server connection error.');
+        }
+    }
+
+    function escapeHTML(str) {
+        if (!str) return '';
+        return str
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    if (refreshMessagesBtn) {
+        refreshMessagesBtn.addEventListener('click', loadAdminMessages);
     }
 });

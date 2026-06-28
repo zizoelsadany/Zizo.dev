@@ -65,6 +65,14 @@ const SkillSchema = new mongoose.Schema({
 });
 const Skill = mongoose.model('Skill', SkillSchema);
 
+const MessageSchema = new mongoose.Schema({
+    name: String,
+    email: String,
+    message: String,
+    createdAt: { type: Date, default: Date.now }
+});
+const Message = mongoose.model('Message', MessageSchema);
+
 // Middleware
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
@@ -92,6 +100,7 @@ if (!fs.existsSync(DATA_DIR)) {
 const PROJECTS_FILE = path.join(DATA_DIR, 'projects.json');
 const PROFILE_FILE = path.join(DATA_DIR, 'profile.json');
 const SKILLS_FILE = path.join(DATA_DIR, 'skills.json');
+const MESSAGES_FILE = path.join(DATA_DIR, 'messages.json');
 
 // --- SEED SECTIONS ---
 const initialProjects = [
@@ -582,6 +591,109 @@ app.delete('/api/projects/:id', async (req, res) => {
             res.json({ success: true, message: "Project deleted successfully." });
         } else {
             res.status(500).json({ success: false, message: "Failed to delete project." });
+        }
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message });
+    }
+});
+
+// 5. Messages Routes (Contact Form)
+app.post('/api/messages', async (req, res) => {
+    const { name, email, message } = req.body;
+    if (!name || !email || !message) {
+        return res.status(400).json({ success: false, message: "All fields are required." });
+    }
+
+    const newMessageData = {
+        name,
+        email,
+        message,
+        createdAt: new Date()
+    };
+
+    try {
+        if (process.env.MONGODB_URI) {
+            await connectDB();
+            const msg = new Message(newMessageData);
+            await msg.save();
+            const o = msg.toObject();
+            o.id = o._id.toString();
+            return res.status(201).json({ success: true, message: o });
+        }
+
+        // Local fallback
+        const messages = fs.existsSync(MESSAGES_FILE) ? readJSON(MESSAGES_FILE) : [];
+        const newMessage = {
+            id: Date.now().toString(),
+            ...newMessageData
+        };
+        messages.push(newMessage);
+        if (writeJSON(MESSAGES_FILE, messages)) {
+            res.status(201).json({ success: true, message: newMessage });
+        } else {
+            res.status(500).json({ success: false, message: "Failed to save message." });
+        }
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message });
+    }
+});
+
+app.get('/api/messages', async (req, res) => {
+    const token = req.headers.authorization;
+    if (token !== "zizo_secret_session_token_12345") {
+        return res.status(403).json({ success: false, message: "Unauthorized." });
+    }
+
+    try {
+        if (process.env.MONGODB_URI) {
+            await connectDB();
+            const messages = await Message.find().sort({ createdAt: -1 });
+            const mapped = messages.map(m => {
+                const o = m.toObject();
+                o.id = o._id.toString();
+                return o;
+            });
+            return res.json(mapped);
+        }
+
+        // Local fallback
+        const messages = fs.existsSync(MESSAGES_FILE) ? readJSON(MESSAGES_FILE) : [];
+        const sorted = [...messages].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        res.json(sorted);
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message });
+    }
+});
+
+app.delete('/api/messages/:id', async (req, res) => {
+    const token = req.headers.authorization;
+    if (token !== "zizo_secret_session_token_12345") {
+        return res.status(403).json({ success: false, message: "Unauthorized." });
+    }
+
+    const { id } = req.params;
+
+    try {
+        if (process.env.MONGODB_URI) {
+            await connectDB();
+            const msg = await Message.findByIdAndDelete(id);
+            if (!msg) return res.status(404).json({ success: false, message: "Message not found." });
+            return res.json({ success: true, message: "Message deleted successfully." });
+        }
+
+        // Local fallback
+        let messages = fs.existsSync(MESSAGES_FILE) ? readJSON(MESSAGES_FILE) : [];
+        const initialLength = messages.length;
+        messages = messages.filter(m => m.id !== id);
+
+        if (messages.length === initialLength) {
+            return res.status(404).json({ success: false, message: "Message not found." });
+        }
+
+        if (writeJSON(MESSAGES_FILE, messages)) {
+            res.json({ success: true, message: "Message deleted successfully." });
+        } else {
+            res.status(500).json({ success: false, message: "Failed to delete message." });
         }
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });

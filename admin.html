@@ -64,6 +64,9 @@
             <button class="tab-btn" data-tab="skills-tab">
                 <i data-lucide="cpu"></i> Technical Skills
             </button>
+            <button class="tab-btn" data-tab="messages-tab">
+                <i data-lucide="mail"></i> Messages Inbox
+            </button>
         </div>
 
         <!-- Tab 1: Projects (Form + List Grid) -->
@@ -280,6 +283,29 @@
                     </button>
                 </div>
                 <div id="skills-status" class="form-status"></div>
+            </div>
+        </div>
+        <!-- Tab 4: Messages Inbox -->
+        <div class="tab-panel" id="messages-tab">
+            <div class="card shadow-lg" style="max-width: 1000px; margin: 0 auto;">
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
+                    <div>
+                        <h2 class="card-title">
+                            <i data-lucide="mail" class="text-gradient"></i> Visitor Messages
+                        </h2>
+                        <p class="card-subtitle">Read and manage contact submissions from your portfolio site.</p>
+                    </div>
+                    <button id="refresh-messages-btn" class="btn btn-secondary btn-sm" style="padding: 8px 16px; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;">
+                        <i data-lucide="refresh-cw" style="width:14px; height:14px;"></i> Refresh Inbox
+                    </button>
+                </div>
+                
+                <div class="messages-list" id="messages-list" style="margin-top: 20px;">
+                    <!-- Filled dynamically -->
+                    <div class="loading-state">
+                        <span class="pulse-dot"></span> Loading inbox...
+                    </div>
+                </div>
             </div>
         </div>
     </main>
