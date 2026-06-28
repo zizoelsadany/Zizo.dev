@@ -1,0 +1,41 @@
+[
+  {
+    "id": "1",
+    "title": "AI SaaS Analytics Dashboard",
+    "description": "A real-time data analysis software incorporating OpenAI API for smart content generation, predictive graphs, and multi-tenant user billing integration.",
+    "image": "assets/project_saas.png",
+    "tags": [
+      "Next.js",
+      "TypeScript",
+      "OpenAI"
+    ],
+    "demoLink": "#",
+    "githubLink": "#"
+  },
+  {
+    "id": "2",
+    "title": "Sleek Headless E-Commerce",
+    "description": "A lightning-fast modern online store featuring modular item grids, search filtering, user profile carts, and a highly secure checkout flow with Stripe.",
+    "image": "assets/project_ecommerce.png",
+    "tags": [
+      "React.js",
+      "Node.js",
+      "Stripe"
+    ],
+    "demoLink": "#",
+    "githubLink": "#"
+  },
+  {
+    "id": "3",
+    "title": "Interactive Kanban Board",
+    "description": "A highly interactive productivity software with drag-and-drop capability, user workspaces, customizable color themes, and automatic browser storage persistence.",
+    "image": "assets/project_dashboard.png",
+    "tags": [
+      "HTML5",
+      "CSS3",
+      "JavaScript"
+    ],
+    "demoLink": "#",
+    "githubLink": "#"
+  }
+]

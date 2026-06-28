@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeyad | Creative Full-Stack Developer</title>
+    <!-- Meta tags for SEO -->
+    <meta name="description"
+        content="Portfolio of Zeyad (Zizo), a Senior Full-Stack Developer specializing in building high-performance, modern, and scalable web applications.">
+    <meta name="keywords"
+        content="Zeyad, Zizo, Web Developer, Full-Stack Developer, Portfolio, React, Node.js, Next.js, Portfolio Design">
+    <meta name="author" content="Zeyad">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Radial Background Glows -->
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
+    <div class="grid-overlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="navbar-container">
+        <nav class="navbar" id="main-nav">
+            <div class="nav-logo">
+                <a href="#home">
+                    <span id="logo-first">Zeyad</span> <span id="logo-last">Zizo</span>
+                    <div class="logo-subtitle" id="logo-sub">PORTFOLIO</div>
+                </a>
+            </div>
+
+            <div class="nav-menu" id="nav-menu">
+                <!-- Glowing slider background behind active item -->
+                <div class="nav-active-pill" id="nav-active-pill"></div>
+
+                <a href="#home" class="nav-link active" data-section="home"><i data-lucide="home"></i>Home</a>
+                <a href="#about" class="nav-link" data-section="about"><i data-lucide="user"></i>About</a>
+                <a href="#services" class="nav-link" data-section="services"><i data-lucide="zap"></i>Services</a>
+                <a href="#skills" class="nav-link" data-section="skills"><i data-lucide="lightbulb"></i>Skills</a>
+                <a href="#projects" class="nav-link" data-section="projects"><i data-lucide="briefcase"></i>Projects</a>
+                <a href="#contact" class="nav-link" data-section="contact"><i data-lucide="mail"></i>Contact</a>
+            </div>
+
+            <div class="nav-cta">
+                <a href="#contact" class="btn hire-btn">
+                    <span>Hire Me</span>
+                    <i data-lucide="rocket"></i>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+                <i data-lucide="menu" id="menu-icon"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Centered Hero Section -->
+    <section id="home" class="hero-section">
+        <!-- Floating background decoration shapes -->
+        <div class="hero-bg-shapes">
+            <div class="floating-shape shape-1">&lt;/&gt;</div>
+            <div class="floating-shape shape-2">{ }</div>
+            <div class="floating-shape shape-3">#</div>
+            <div class="floating-shape shape-4">&lambda;</div>
+        </div>
+
+        <div class="container hero-container">
+            <div class="badge hero-badge">
+                <span class="pulse-dot"></span>
+                <span>Available for Work</span>
+            </div>
+
+            <h1 class="hero-title" id="hero-name">
+                Zeyad Zizo
+            </h1>
+
+            <h2 class="hero-subtitle text-gradient" id="hero-title">
+                Senior Full-Stack Developer
+            </h2>
+
+            <p class="hero-description" id="hero-desc">
+                I build premium, high-performance web applications with a focus on animation, responsive UI
+                architecture, and robust database logic.
+            </p>
+
+            <div class="hero-actions">
+                <a href="#projects" class="btn btn-primary">
+                    <span>View Projects</span>
+                    <i data-lucide="arrow-right"></i>
+                </a>
+                <a href="/api/profile/download-cv" class="btn btn-secondary" download>
+                    <i data-lucide="download"></i>
+                    <span>Download CV</span>
+                </a>
+            </div>
+
+            <!-- Unique Feature: Interactive Code Sandbox Terminal -->
+            <div class="terminal-container">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <span class="terminal-dot close"></span>
+                        <span class="terminal-dot minimize"></span>
+                        <span class="terminal-dot maximize"></span>
+                    </div>
+                    <div class="terminal-title">guest@zizo.dev:~</div>
+                    <div></div>
+                </div>
+                <div class="terminal-body" id="terminal-body">
+                    <div class="terminal-line text-muted">Welcome to Zeyad's Interactive Terminal.</div>
+                    <div class="terminal-line text-muted">Type <span class="text-gradient"
+                            style="font-weight:bold;">help</span> to see available commands (skills, projects, about,
+                        contact, clear).</div>
+                    <div class="terminal-line">&nbsp;</div>
+                    <div class="terminal-input-line">
+                        <span class="terminal-prompt">guest@zizo.dev:~$</span>
+                        <input type="text" class="terminal-input" id="terminal-input" autofocus autocomplete="off"
+                            spellcheck="false">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <a href="#about" aria-label="Scroll down">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <span>Scroll to explore</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tagline">About Me</span>
+                <h2 class="section-title">My Journey & Expertise</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-bio">
+                    <h3 class="bio-title" id="about-bio-title">I engineer digital solutions that load fast and look
+                        premium.</h3>
+                    <p class="bio-text" id="about-bio-text-1">
+                        I am a passionate Full-Stack developer with a knack for building sleek user interfaces and solid
+                        backends. I love staying at the forefront of web technologies and creating highly optimized web
+                        systems.
+                    </p>
+                    <p class="bio-text" id="about-bio-text-2">
+                        Whether it's a high-concurrency SaaS dashboard, a fast-loading landing page, or a dynamic
+                        application, I focus on clean architecture, beautiful animations, and ultimate mobile
+                        responsiveness.
+                    </p>
+                    <div class="bio-details">
+                        <div class="bio-detail-item">
+                            <span class="label">Location</span>
+                            <span class="value" id="about-location">Cairo, Egypt</span>
+                        </div>
+                        <div class="bio-detail-item">
+                            <span class="label">Email</span>
+                            <span class="value" id="about-email"><a
+                                    href="mailto:zeyad@zizo.dev">zeyad@zizo.dev</a></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon-wrapper">
+                            <i data-lucide="briefcase"></i>
+                        </div>
+                        <h4 class="stat-number" id="stat-experience">3+</h4>
+                        <p class="stat-label">Years of Experience</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon-wrapper">
+                            <i data-lucide="check-circle-2"></i>
+                        </div>
+                        <h4 class="stat-number" id="stats-projects-count">25+</h4>
+                        <p class="stat-label">Projects Completed</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon-wrapper">
+                            <i data-lucide="users"></i>
+                        </div>
+                        <h4 class="stat-number" id="stat-clients">15+</h4>
+                        <p class="stat-label">Happy Clients</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon-wrapper">
+                            <i data-lucide="award"></i>
+                        </div>
+                        <h4 class="stat-number" id="stat-success">99%</h4>
+                        <p class="stat-label">Success Rate</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services / Value Proposition Section -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tagline">My Services</span>
+                <h2 class="section-title">What I Bring to the Table</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="services-grid">
+                <!-- Card 1: Performance -->
+                <div class="service-card reveal-card">
+                    <div class="card-glow"></div>
+                    <div class="service-icon">
+                        <i data-lucide="gauge"></i>
+                    </div>
+                    <h3 class="service-title">Blazing Fast Performance</h3>
+                    <p class="service-desc">
+                        Optimizing web performance down to milliseconds. Clean bundle splitting, static generation, and
+                        efficient asset delivery.
+                    </p>
+                    <div class="performance-metric">
+                        <div class="metric-header">
+                            <span>Lighthouse Score</span>
+                            <span class="metric-val text-gradient" style="font-weight: bold;">100%</span>
+                        </div>
+                        <div class="metric-bar">
+                            <div class="metric-fill" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Tech Stack -->
+                <div class="service-card reveal-card">
+                    <div class="card-glow"></div>
+                    <div class="service-icon">
+                        <i data-lucide="layers"></i>
+                    </div>
+                    <h3 class="service-title">Modern Web Tech</h3>
+                    <p class="service-desc">
+                        Developing interfaces with state-of-the-art tech. Sticking to high coding standards and solid
+                        framework configurations.
+                    </p>
+                    <div class="tech-icons-preview">
+                        <span class="tech-tag-sm">React</span>
+                        <span class="tech-tag-sm">Next.js</span>
+                        <span class="tech-tag-sm">Node.js</span>
+                        <span class="tech-tag-sm">Tailwind</span>
+                    </div>
+                </div>
+
+                <!-- Card 3: Responsive Design -->
+                <div class="service-card reveal-card">
+                    <div class="card-glow"></div>
+                    <div class="service-icon">
+                        <i data-lucide="smartphone"></i>
+                    </div>
+                    <h3 class="service-title">Responsive Layouts</h3>
+                    <p class="service-desc">
+                        Crafting fluid interfaces that look phenomenal on high-res monitors, tablets, and small phone
+                        screens.
+                    </p>
+                    <div class="device-preview">
+                        <div class="device-phone">
+                            <div class="device-screen"></div>
+                        </div>
+                        <div class="device-tablet">
+                            <div class="device-screen"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: SEO Ready -->
+                <div class="service-card reveal-card">
+                    <div class="card-glow"></div>
+                    <div class="service-icon">
+                        <i data-lucide="search"></i>
+                    </div>
+                    <h3 class="service-title">SEO & Scalability</h3>
+                    <p class="service-desc">
+                        Writing clean Semantic markup, optimized meta titles, schema markup, and structured layouts to
+                        rank higher on search engines.
+                    </p>
+                    <div class="seo-preview">
+                        <span class="seo-title">Google Search Preview</span>
+                        <span class="seo-link">https://zizo.dev</span>
+                        <span class="seo-snippet">Creative Full-Stack Developer crafting high-performance,
+                            responsive...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tagline">Expertise</span>
+                <h2 class="section-title">My Tech Stack</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="skills-grid" id="skills-grid">
+                <!-- Loaded dynamically -->
+                <div class="loading-state"
+                    style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">
+                    <div class="pulse-dot"></div> &nbsp;&nbsp;Loading skills from database...
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section (Fills dynamically) -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tagline">My Works</span>
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <!-- Dynamic Grid loaded via API -->
+            <div class="projects-grid" id="projects-grid">
+                <!-- Loading placeholder cards -->
+                <div class="project-card"
+                    style="opacity: 0.6; min-height: 300px; display: flex; align-items: center; justify-content: center;">
+                    <div class="pulse-dot"></div> &nbsp;&nbsp;Loading projects from database...
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container contact-container">
+            <div class="contact-left">
+                <div class="section-header align-left">
+                    <span class="section-tagline">Get In Touch</span>
+                    <h2 class="section-title">Let's create something specific</h2>
+                    <div class="section-line"></div>
+                </div>
+                <p class="contact-intro">
+                    Have a project in mind? Looking to partner or work together? Reach out through the form and I'll get
+                    back to you in the next 24 hours.
+                </p>
+                <div class="contact-links">
+                    <a href="mailto:zeyad@zizo.dev" class="email-link">
+                        <div class="icon-circle">
+                            <i data-lucide="send"></i>
+                        </div>
+                        <span>zeyad@zizo.dev</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-right">
+                <div class="contact-card">
+                    <h3 class="contact-card-title">Contact Me</h3>
+                    <p class="contact-card-subtitle">Fill out the form below to send me a message.</p>
+
+                    <form id="contact-form" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="John Doe" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Describe your project..."
+                                required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block submit-btn" id="submit-btn">
+                            <span class="btn-text">Send Message</span>
+                            <i data-lucide="send"></i>
+                        </button>
+                    </form>
+                    <div class="form-status" id="form-status"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-logo">
+                <a href="#home">z<span>.</span>dev</a>
+                <p class="footer-subtitle">Crafting premium, fast, and scalable digital experiences.</p>
+            </div>
+
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+
+            <div class="footer-socials">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i
+                        data-lucide="github"></i></a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i
+                        data-lucide="linkedin"></i></a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i
+                        data-lucide="twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Zeyad. All rights reserved. | <a href="/admin.html" class="text-gradient"
+                    style="font-weight: 600;"><i data-lucide="shield-alert"
+                        style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i>Admin
+                    Panel</a></p>
+            <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+                <i data-lucide="chevron-up"></i>
+            </button>
+        </div>
+    </footer>
+
+    <!-- App Script -->
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+[
+  {
+    "category": "Languages & Core",
+    "id": "languages",
+    "icon": "code-2",
+    "skills": [
+      {
+        "name": "JavaScript (ES6+)",
+        "level": 95
+      },
+      {
+        "name": "TypeScript",
+        "level": 85
+      },
+      {
+        "name": "HTML5 & CSS3",
+        "level": 95
+      },
+      {
+        "name": "PHP / Python",
+        "level": 75
+      }
+    ]
+  },
+  {
+    "category": "Frontend Frameworks",
+    "id": "frontend",
+    "icon": "layout",
+    "skills": [
+      {
+        "name": "React.js",
+        "level": 92
+      },
+      {
+        "name": "Next.js (App Router)",
+        "level": 90
+      },
+      {
+        "name": "TailwindCSS",
+        "level": 95
+      },
+      {
+        "name": "Redux / Zustand",
+        "level": 85
+      }
+    ]
+  },
+  {
+    "category": "Backend & Databases",
+    "id": "backend",
+    "icon": "server",
+    "skills": [
+      {
+        "name": "Node.js / Express",
+        "level": 90
+      },
+      {
+        "name": "MongoDB",
+        "level": 88
+      },
+      {
+        "name": "PostgreSQL / MySQL",
+        "level": 85
+      },
+      {
+        "name": "RESTful & GraphQL APIs",
+        "level": 90
+      }
+    ]
+  },
+  {
+    "category": "Tools & DevOps",
+    "id": "tools",
+    "icon": "terminal",
+    "skills": [
+      {
+        "name": "Git & GitHub",
+        "level": 95
+      },
+      {
+        "name": "Docker",
+        "level": 70
+      },
+      {
+        "name": "Linux / Bash",
+        "level": 80
+      },
+      {
+        "name": "Vercel / Netlify / AWS",
+        "level": 90
+      }
+    ]
+  }
+]
