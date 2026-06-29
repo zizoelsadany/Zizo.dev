@@ -21,6 +21,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectDemoInput = document.getElementById('project-demo');
     const projectGithubInput = document.getElementById('project-github');
 
+    const toggleUploadFile = document.getElementById('toggle-upload-file');
+    const toggleUploadUrl = document.getElementById('toggle-upload-url');
+    const fileUploadContainer = document.getElementById('file-upload-container');
+    const urlUploadContainer = document.getElementById('url-upload-container');
+    const projectImageFileInput = document.getElementById('project-image-file');
+    const imageDragZone = document.getElementById('image-drag-zone');
+    const imagePreviewContainer = document.getElementById('image-preview-container');
+    const projectImagePreview = document.getElementById('project-image-preview');
+    const btnRemoveImage = document.getElementById('btn-remove-image');
+
     const formActionTitle = document.getElementById('form-action-title');
     const cancelEditBtn = document.getElementById('cancel-edit-btn');
     const saveBtn = document.getElementById('save-btn');
@@ -187,11 +197,138 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function updateProjectImagePreview(urlOrBase64) {
+        if (urlOrBase64) {
+            projectImagePreview.src = urlOrBase64;
+            imagePreviewContainer.style.display = 'flex';
+        } else {
+            projectImagePreview.src = '';
+            imagePreviewContainer.style.display = 'none';
+        }
+    }
+
+    function resetImageUpload() {
+        if (projectImageFileInput) projectImageFileInput.value = '';
+        if (projectImageInput) projectImageInput.value = '';
+        updateProjectImagePreview('');
+    }
+
+    async function uploadImageFile(file) {
+        const token = localStorage.getItem('zizo_admin_token');
+        const reader = new FileReader();
+        
+        imagePreviewContainer.style.display = 'flex';
+        projectImagePreview.style.opacity = '0.5';
+        
+        reader.onload = async () => {
+            const base64Data = reader.result;
+            try {
+                const response = await fetch('/api/projects/upload-image', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token
+                    },
+                    body: JSON.stringify({ fileData: base64Data })
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    projectImageInput.value = data.imageUrl;
+                    projectImagePreview.src = data.imageUrl;
+                    projectImagePreview.style.opacity = '1';
+                } else {
+                    alert('Image upload failed: ' + (data.message || 'Unknown error'));
+                    resetImageUpload();
+                }
+            } catch (err) {
+                alert('Image upload network error.');
+                resetImageUpload();
+            }
+        };
+        
+        reader.onerror = () => {
+            alert('Failed to read image file.');
+            resetImageUpload();
+        };
+        
+        reader.readAsDataURL(file);
+    }
+
+    // Set up project image upload event listeners
+    if (toggleUploadFile && toggleUploadUrl) {
+        toggleUploadFile.addEventListener('click', () => {
+            toggleUploadFile.classList.add('active');
+            toggleUploadUrl.classList.remove('active');
+            fileUploadContainer.style.display = 'block';
+            urlUploadContainer.style.display = 'none';
+        });
+
+        toggleUploadUrl.addEventListener('click', () => {
+            toggleUploadUrl.classList.add('active');
+            toggleUploadFile.classList.remove('active');
+            urlUploadContainer.style.display = 'block';
+            fileUploadContainer.style.display = 'none';
+        });
+    }
+
+    if (projectImageInput) {
+        projectImageInput.addEventListener('input', () => {
+            const val = projectImageInput.value.trim();
+            updateProjectImagePreview(val);
+        });
+    }
+
+    if (projectImageFileInput) {
+        projectImageFileInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files[0]) {
+                uploadImageFile(e.target.files[0]);
+            }
+        });
+    }
+
+    if (imageDragZone) {
+        ['dragenter', 'dragover'].forEach(eventName => {
+            imageDragZone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                imageDragZone.classList.add('dragover');
+            }, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            imageDragZone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                imageDragZone.classList.remove('dragover');
+            }, false);
+        });
+
+        imageDragZone.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            if (files && files[0]) {
+                uploadImageFile(files[0]);
+            }
+        }, false);
+    }
+
+    if (btnRemoveImage) {
+        btnRemoveImage.addEventListener('click', () => {
+            resetImageUpload();
+        });
+    }
+
     function setupEditMode(project) {
         projectIdInput.value = project.id;
         projectTitleInput.value = project.title;
         projectDescInput.value = project.description;
         projectImageInput.value = project.image;
+        if (project.image) {
+            updateProjectImagePreview(project.image);
+        } else {
+            updateProjectImagePreview('');
+        }
         projectTagsInput.value = project.tags.join(', ');
         projectDemoInput.value = project.demoLink;
         projectGithubInput.value = project.githubLink;
@@ -211,6 +348,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function resetForm() {
         projectForm.reset();
         projectIdInput.value = '';
+        updateProjectImagePreview('');
+        if (toggleUploadFile && toggleUploadUrl) {
+            toggleUploadFile.click();
+        }
         formActionTitle.innerHTML = `<i data-lucide="plus-circle" class="text-gradient"></i> Add New Project`;
         saveBtn.innerHTML = `<i data-lucide="save"></i> Save Project`;
         cancelEditBtn.style.display = 'none';

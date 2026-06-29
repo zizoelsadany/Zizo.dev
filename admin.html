@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AbdElaziz | Portfolio Admin Manager</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -94,9 +96,33 @@
                             </div>
                             
                             <div class="form-group">
-                                <label for="project-image">Image URL / Path</label>
-                                <input type="text" id="project-image" placeholder="e.g. assets/project_saas.png or external link">
-                                <span class="help-text">Can be local assets (e.g. assets/project_saas.png) or full https URLs.</span>
+                                <label>Project Image</label>
+                                <div class="image-upload-wrapper">
+                                    <div class="upload-toggle-tabs">
+                                        <button type="button" class="upload-tab-btn active" id="toggle-upload-file">Upload File</button>
+                                        <button type="button" class="upload-tab-btn" id="toggle-upload-url">Enter URL</button>
+                                    </div>
+                                    
+                                    <div class="upload-field-container" id="file-upload-container">
+                                        <div class="drag-drop-zone" id="image-drag-zone">
+                                            <i data-lucide="image-plus" class="upload-icon"></i>
+                                            <span class="upload-text">Drag & drop image here or <strong>browse</strong></span>
+                                            <input type="file" id="project-image-file" accept="image/*" class="file-input-hidden">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="upload-field-container" id="url-upload-container" style="display: none;">
+                                        <input type="text" id="project-image" placeholder="e.g. assets/project_saas.png or external link">
+                                    </div>
+                                    
+                                    <div class="image-upload-preview" id="image-preview-container" style="display: none;">
+                                        <img src="" alt="Project Image Preview" id="project-image-preview">
+                                        <button type="button" class="btn-remove-preview" id="btn-remove-image" title="Remove image">
+                                            <i data-lucide="x"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <span class="help-text" id="image-help-text">Select an image to upload, or switch to "Enter URL" for external links.</span>
                             </div>
                             
                             <div class="form-group">

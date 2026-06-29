@@ -461,6 +461,53 @@ app.get('/api/projects', async (req, res) => {
     }
 });
 
+// Project Image Upload Route
+app.post('/api/projects/upload-image', async (req, res) => {
+    const token = req.headers.authorization;
+    if (token !== "zizo_secret_session_token_12345") {
+        return res.status(403).json({ success: false, message: "Unauthorized." });
+    }
+
+    const { fileData } = req.body;
+    if (!fileData) {
+        return res.status(400).json({ success: false, message: "No file data provided." });
+    }
+
+    try {
+        if (process.env.MONGODB_URI) {
+            // Under MongoDB, return the base64 string directly so it is stored in the Project document
+            return res.json({ success: true, imageUrl: fileData });
+        }
+
+        // Local filesystem fallback
+        const matches = fileData.match(/^data:image\/([A-Za-z0-9-+]+);base64,(.+)$/);
+        if (!matches || matches.length !== 3) {
+            // If it's already a URL or doesn't match base64 format, return it back
+            return res.json({ success: true, imageUrl: fileData });
+        }
+
+        const ext = matches[1] === 'jpeg' ? 'jpg' : matches[1];
+        const buffer = Buffer.from(matches[2], 'base64');
+        
+        // Ensure assets/uploads directory exists
+        const uploadsDir = path.join(__dirname, 'assets', 'uploads');
+        if (!fs.existsSync(uploadsDir)) {
+            fs.mkdirSync(uploadsDir, { recursive: true });
+        }
+
+        const uniqueName = `project_${Date.now()}.${ext}`;
+        const filePath = path.join(uploadsDir, uniqueName);
+        
+        fs.writeFileSync(filePath, buffer);
+        
+        const relativeUrl = `/assets/uploads/${uniqueName}`;
+        res.json({ success: true, imageUrl: relativeUrl });
+    } catch (err) {
+        console.error("Error saving uploaded image:", err);
+        res.status(500).json({ success: false, message: "Failed to save uploaded image." });
+    }
+});
+
 app.post('/api/projects', async (req, res) => {
     const token = req.headers.authorization;
     if (token !== "zizo_secret_session_token_12345") {
