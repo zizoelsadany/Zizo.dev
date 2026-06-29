@@ -364,6 +364,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         lines.forEach(line => line.remove());
                         responseLine.innerHTML = '';
                         break;
+                    case 'admin':
+                    case 'admin.html':
+                        responseLine.innerHTML = "<span class=\"text-gradient\" style=\"font-weight:bold;\">Redirecting to Admin Panel...</span>";
+                        setTimeout(() => {
+                            window.location.href = '/admin.html';
+                        }, 800);
+                        break;
                     default:
                         responseLine.innerHTML = `sh: command not found: <span style="color:#ef4444;">${command}</span>. Type <span style="color:var(--accent-color);">help</span> for instructions.`;
                         break;
