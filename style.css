@@ -303,10 +303,24 @@ p {
     justify-content: space-between;
     padding: 10px 16px;
     background: transparent;
-    border: none;
+    border: 1px solid transparent;
+    border-radius: 0;
     box-shadow: none;
     position: relative;
-    transition: var(--transition-smooth);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.navbar.scrolled {
+    background: rgba(10, 10, 18, 0.75);
+    border-color: rgba(255, 255, 255, 0.08);
+    border-radius: 100px;
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.6),
+        0 0 20px rgba(var(--accent-color-rgb), 0.05);
+    padding: 8px 24px;
+    max-width: 1050px;
 }
 
 .nav-logo {
@@ -322,11 +336,19 @@ p {
     font-weight: 800;
     font-size: 1.25rem;
     letter-spacing: -0.03em;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.navbar.scrolled .nav-logo a {
+    font-size: 1.05rem;
+    flex-direction: row;
+    gap: 6px;
+    align-items: center;
 }
 
 .nav-logo span {
-    color: var(--accent-secondary); /* Neon Cyan */
-    text-shadow: 0 0 10px rgba(34, 211, 238, 0.3);
+    color: var(--accent-secondary);
+    text-shadow: 0 0 10px rgba(var(--accent-secondary-rgb), 0.3);
 }
 
 .logo-subtitle {
@@ -337,6 +359,17 @@ p {
     letter-spacing: 0.25em;
     margin-top: 3px;
     font-weight: 700;
+    opacity: 1;
+    max-height: 20px;
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled .logo-subtitle {
+    opacity: 0;
+    max-height: 0;
+    margin-top: 0;
+    pointer-events: none;
+    overflow: hidden;
 }
 
 .nav-menu {
@@ -352,24 +385,27 @@ p {
     padding: 6px 12px;
     box-shadow: 
         0 10px 40px rgba(0, 0, 0, 0.5),
-        0 0 20px rgba(168, 85, 247, 0.04);
-    transition: var(--transition-smooth);
+        0 0 20px rgba(var(--accent-color-rgb), 0.04);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.navbar.scrolled .nav-menu {
-    background: rgba(3, 7, 18, 0.85);
-    border-color: rgba(168, 85, 247, 0.2);
-    box-shadow: 
-        0 10px 45px rgba(0, 0, 0, 0.6),
-        0 0 25px rgba(168, 85, 247, 0.1);
+@media (min-width: 769px) {
+    .navbar.scrolled .nav-menu {
+        background: transparent;
+        border-color: transparent;
+        box-shadow: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        padding: 0;
+    }
 }
 
 /* Dynamic Navbar Indicator */
 .nav-active-pill {
     position: absolute;
-    background: rgba(168, 85, 247, 0.12);
-    border: 1px solid rgba(168, 85, 247, 0.35);
-    box-shadow: 0 0 12px rgba(168, 85, 247, 0.15);
+    background: rgba(var(--accent-color-rgb), 0.12);
+    border: 1px solid rgba(var(--accent-color-rgb), 0.35);
+    box-shadow: 0 0 12px rgba(var(--accent-color-rgb), 0.15);
     border-radius: 100px;
     transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
     pointer-events: none;
@@ -433,8 +469,14 @@ p {
 
 .hire-btn:hover {
     transform: translateY(-1.5px) scale(1.03);
-    box-shadow: 0 0 25px rgba(34, 211, 238, 0.6);
+    box-shadow: 0 0 25px rgba(var(--accent-secondary-rgb), 0.6);
     color: #030712;
+}
+
+.navbar.scrolled .hire-btn {
+    padding: 8px 18px;
+    font-size: 0.8rem;
+    box-shadow: 0 0 10px rgba(var(--accent-secondary-rgb), 0.2);
 }
 
 .mobile-toggle {
